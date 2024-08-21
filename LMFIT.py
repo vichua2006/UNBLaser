@@ -14,12 +14,16 @@ df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").
 x = df[ : , 0]
 y = df[ : , 3]
 
+init_amp = y.max()
+init_cen = np.ndarray.tolist(x)[np.argmax(y)]
+init_wid = 0.435 # obtained from inital arbitrary parameters 
+init_off = 0.002 # obtained from inital arbitrary parameters 
 
-init_amp = 0.332
-init_cen = 8.45
-init_wid = 0
-init_off = 0.002
-
+# Parametered obtained from abritary initial parameters
+# init_amp = 0.325
+# init_cen = 8.367
+# init_wid = 0.435
+# init_off = 0.002
     
 LoadPreviousFit  = False
 ShowInitialGuess = True
@@ -34,8 +38,8 @@ else:
 	# Parameter definitions, initial guess
 	amp = lm.Parameter(name='amp', value=init_amp, vary=True, min=0., max=5.)
 	cen = lm.Parameter(name='cen', value=init_cen, vary=True, min=-np.inf, max=np.inf)
-	off = lm.Parameter(name='off', value=init_wid, vary=True, min=-np.inf, max=np.inf)
-	wid = lm.Parameter(name='wid', value=init_off, vary=True, min=0., max=5.)
+	off = lm.Parameter(name='off', value=init_off, vary=True, min=-np.inf, max=np.inf)
+	wid = lm.Parameter(name='wid', value=init_wid, vary=True, min=0., max=5.)
 
 	params = lm.Parameters()
 	params.add_many(amp, cen, wid, off)

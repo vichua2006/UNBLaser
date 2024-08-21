@@ -9,6 +9,11 @@ def FindG(x, y):
 
     return (amp, cen, off)
 
+def search(arr: np.ndarray, value):
+    n = arr.size
+    idx = 0
+
+
 
 # Read in the csv with pandas as a np array
 df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
@@ -16,4 +21,6 @@ df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").
 x = df[ : , 0]
 y = df[ : , 3]
 
-print(FindG(x, y))
+wid_y = y.max()/7.38905
+
+
