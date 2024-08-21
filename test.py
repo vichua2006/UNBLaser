@@ -1,9 +1,19 @@
+import numpy as np
 import pandas as pd
 
-# Read in the csv with pandas
-df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
-y = df[:, 0]
-dS = df[:, 2]
+def FindG(x, y):
+    amp = max(y) - min(y)
+    cen = x[np.argmax(y)]
+    # wid = waist(x, y)
+    off = -1 * min(y)
 
-print(y)
-print(dS)
+    return (amp, cen, off)
+
+
+# Read in the csv with pandas as a np array
+df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
+
+x = df[ : , 0]
+y = df[ : , 3]
+
+print(FindG(x, y))

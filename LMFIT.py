@@ -14,6 +14,12 @@ df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").
 x = df[ : , 0]
 y = df[ : , 3]
 
+
+init_amp = 0.332
+init_cen = 8.45
+init_wid = 0
+init_off = 0.002
+
     
 LoadPreviousFit  = False
 ShowInitialGuess = True
@@ -26,10 +32,10 @@ else:
 	# params = model.make_params()
 
 	# Parameter definitions, initial guess
-	amp = lm.Parameter(name='amp', value=-1., vary=True, min=0., max=5.)
-	cen = lm.Parameter(name='cen', value=0., vary=True, min=-np.inf, max=np.inf)
-	off = lm.Parameter(name='off', value=0., vary=True, min=-np.inf, max=np.inf)
-	wid = lm.Parameter(name='wid', value=1., vary=True, min=0., max=5.)
+	amp = lm.Parameter(name='amp', value=init_amp, vary=True, min=0., max=5.)
+	cen = lm.Parameter(name='cen', value=init_cen, vary=True, min=-np.inf, max=np.inf)
+	off = lm.Parameter(name='off', value=init_wid, vary=True, min=-np.inf, max=np.inf)
+	wid = lm.Parameter(name='wid', value=init_off, vary=True, min=0., max=5.)
 
 	params = lm.Parameters()
 	params.add_many(amp, cen, wid, off)
@@ -47,9 +53,9 @@ print(result.fit_report())
 print('--------------- Pretty Print ---------------')
 print(result.params.pretty_print())
 
-print('--------------- Custom Print ---------------')
-for val in result.params.values():
-	print('{:s}\t{:.3f}\t{:.3f}'.format(val.name, val.value, val.stderr))
+# print('--------------- Custom Print ---------------')
+# for val in result.params.values():
+# 	print('{:s}\t{:.3f}\t{:.3f}'.format(val.name, val.value, val.stderr))
 
 # fig, axs = plt.subplots(nrows=2, ncols=1, figsize=(7,5), constrained_layout=True)
 
@@ -77,3 +83,6 @@ for ax in axs:
 	ax.grid()
 
 plt.show()
+plt.savefig("Gauss_FitResult.png")
+
+print(result.params)
