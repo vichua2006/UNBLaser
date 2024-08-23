@@ -13,8 +13,8 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 
 	init_amp = y.max()
 	init_cen = np.ndarray.tolist(x)[np.argmax(y)]
-	init_wid = 0.435 # obtained from inital arbitrary parameters 
-	init_off = 0.002 # obtained from inital arbitrary parameters 
+	init_wid = 1
+	init_off = 0
 
 	# Parametered obtained from abritary initial parameters
 	# init_amp = 0.325
@@ -80,6 +80,7 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 
 def main():
 	df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
+
 
 	x = df[ : , 0]
 	y = df[ : , 3]

@@ -11,7 +11,7 @@ deltax = 0.007972665 #mm/pixel
 deltay = 0.007575757 #mm/pixel
 
 #returns list of x, y arrays
-def convertpixtomm(xarray, deltax, yarray, deltay):
+def convertpixtomm(xarray, yarray):
     xarraymm = xarray*deltax
     yarraymm = yarray*deltay
     return [xarraymm, yarraymm]

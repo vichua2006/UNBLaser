@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 #plottingsums
+# combined into 2DImagePlottingFunction.py
+
 
 import numpy as np
 import matplotlib.pyplot as plt
