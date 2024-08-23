@@ -8,6 +8,10 @@ def Gaussian(x, amp, cen, wid, off):
 	"""Simple model of 1D Gaussian function."""
 	return amp * np.exp(-0.5*((x-cen)/wid)**2) + off
 
+
+# def plot(x, y, )
+
+
 # Read in the csv with pandas as a np array
 df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
 
@@ -88,5 +92,3 @@ for ax in axs:
 
 plt.show()
 plt.savefig("Gauss_FitResult.png")
-
-print(result.params)
