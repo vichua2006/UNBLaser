@@ -51,7 +51,7 @@ def main():
     x, y, _ = position_arrays(arr)
     x, y = convertpixtomm(x, y)
     cs, rs = sum_columns_rows(arr)
-    plotGaussian(x, cs, "exp300", ".\\")
+    plotGaussian(x, cs, "exp200", ".\\")
     # a, b, c = position_arrays(arr)
     # scatter_plot(a, b, c)
     

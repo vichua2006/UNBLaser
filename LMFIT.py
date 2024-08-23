@@ -11,10 +11,11 @@ def Gaussian(x, amp, cen, wid, off):
 
 def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 
-	init_amp = y.max()
+	init_amp = float(y.max())
 	init_cen = np.ndarray.tolist(x)[np.argmax(y)]
 	init_wid = 1
 	init_off = 0
+
 
 	# Parametered obtained from abritary initial parameters
 	# init_amp = 0.325
@@ -86,6 +87,7 @@ def main():
 	y = df[ : , 3]
 
 	plotGaussian(x, y, "title", ".\\")
+	print(type(x))
 
 if __name__ == "__main__":
 	main()
