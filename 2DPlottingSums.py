@@ -20,18 +20,3 @@ plt.scatter(realx, column_sums)
 plt.figure()
 plt.scatter(realy, row_sums)
 plt.show()
-
-# prompt: plot two subfigure scatterplots, with same y-axis (brightness), different x axis (x position or y posititon) x and y different sizes
-
-import matplotlib.pyplot as plt
-def subplots_scatter_diff_size(x_pos, y_pos, brightness):
-    fig, axs = plt.subplots(1, 2, figsize=(10, 5))  # Adjust figsize for different sizes
-    axs[0].scatter(x_pos, brightness)
-    axs[0].set_xlabel("x-position")
-    axs[0].set_ylabel("brightness")
-    axs[1].scatter(y_pos, brightness)
-    axs[1].set_xlabel("y-position")
-    axs[1].set_ylabel("brightness")
-    plt.show()
-
-subplots_scatter_diff_size(realx, realy, brightness)
