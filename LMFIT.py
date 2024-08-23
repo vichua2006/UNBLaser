@@ -61,8 +61,8 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 	plt.setp(ax0.get_xticklabels(), visible=False)
 
 	axs[0].set_ylabel(r'$y - f(x)$')
-	axs[1].set_xlabel(r'$x$')
-	axs[1].set_ylabel(r'$y$')
+	axs[1].set_xlabel(r'Position (pixels)')
+	axs[1].set_ylabel(r'Brightness')
 
 	axs[0].plot(x, y-result.best_fit, color='black', marker='.', linestyle='', label='Residuals')
 	axs[1].plot(x, y, color='black', marker='.', linestyle='', label='Data')
@@ -75,5 +75,16 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 		ax.legend(loc='best')
 		ax.grid()
 
-	plt.show()
-	plt.savefig(f"{dest_dir}\\{title}.png")
+	plt.savefig(f"{dest_dir}\\{title}.pdf", format="pdf")
+	plt.close()
+
+def main():
+	df = pd.read_csv(r".\raw_data\(updatedAugust21)powerdata-August21(Victor).csv").to_numpy()
+
+	x = df[ : , 0]
+	y = df[ : , 3]
+
+	plotGaussian(x, y, "title", ".\\")
+
+if __name__ == "__main__":
+	main()
