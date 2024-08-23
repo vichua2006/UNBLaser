@@ -37,7 +37,8 @@ def scatter_plot(x_pos, y_pos, brightness):
 def main():
     arr = load_image(f"{IMGSRC}\\{"exp200.tiff"}")
     a, b, c = position_arrays(arr)
-    scatter_plot(a, b, c)
+    # scatter_plot(a, b, c)
+    
 
 #Example
 '''
