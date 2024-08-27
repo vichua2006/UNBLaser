@@ -1,27 +1,41 @@
-import pandas as pd
-import os
 import matplotlib.pyplot as plt
 import numpy as np
 import lmfit as lm
-from typing import Callable
+
 
 def Gaussian(x, amp, cen, wid, off):
 	"""Simple model of 1D Gaussian function."""
 	# adjusted width to reflect w = I/e^2
 	return amp * np.exp(-2*((x-cen)/wid)**2) + off
 
-def Sinusoidal(x, amp, freq, phi, off):
-    # C: constant offset
-    return amp * np.sin(2*np.pi*freq*x - phi) + off
+def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 
-def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Parameters, func: Callable):
-	"""Plot a general fit curve of a set of data
-	params: [name of parameter: inital guess]	
-	"""
+	init_amp = float(y.max())
+	init_cen = np.ndarray.tolist(x)[np.argmax(y)]
+	init_wid = 1
+	init_off = 0
 
+
+	# Parametered obtained from abritary initial parameters
+	# init_amp = 0.325
+	# init_cen = 8.367
+	# init_wid = 0.435
+	# init_off = 0.002
+		
 	ShowInitialGuess = True
 
-	model  = lm.Model(func)
+	model  = lm.Model(Gaussian)
+	# params = model.make_params()
+
+	params = lm.Parameters()
+
+	# Parameter definitions, initial guess
+	params.add(lm.Parameter(name='amp', value=init_amp, vary=True, min=0., max=np.inf))
+	params.add(lm.Parameter(name='cen', value=init_cen, vary=True, min=-np.inf, max=np.inf))
+	params.add(lm.Parameter(name='off', value=init_off, vary=True, min=-np.inf, max=np.inf))
+	params.add(lm.Parameter(name='wid', value=init_wid, vary=True, min=0., max=np.inf))
+
+	# creates a parameters objects
 
 	# fit the curve to those parameters 
 	result = model.fit(y, params, x=x)
@@ -59,24 +73,3 @@ def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Pa
 	plt.title(title)
 	plt.savefig(f"{dest_dir}\\{title}.pdf", format="pdf")
 	plt.close()
-
-def main():
-	df = pd.read_csv(r".\HalfWavePlate\raw_data\aug_27.csv").to_numpy()
-	df = df[:-2]
-
-
-	x = df[ : , 1]
-	y = df[ : , 2]
-	y2 = df[ : , 3]
-
-	params = lm.Parameters()
-	params.add(lm.Parameter(name='amp', value=float(y.max()) - 400., vary=True, min=0., max=np.inf))
-	params.add(lm.Parameter(name='freq', value=2*np.pi, vary=True, min=0, max=np.inf))
-	params.add(lm.Parameter(name='off', value=400, vary=True, min=-np.inf, max=np.inf))
-	params.add(lm.Parameter(name='phi', value=0, vary=True, min=0., max=10))
-
-	lmfit(x, y, "title", ".\\", params, Sinusoidal)
-	lmfit(x, y2, "title2", ".\\", params, Sinusoidal)
-
-if __name__ == "__main__":
-	main()
