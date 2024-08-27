@@ -9,7 +9,9 @@ def Gaussian(x, amp, cen, wid, off):
 	# adjusted width to reflect w = I/e^2
 	return amp * np.exp(-2*((x-cen)/wid)**2) + off
 
-
+def mySine(x, amp, freq, phi, C):
+    # C: constant offset
+    return amp * np.sin(2*np.pi*freq*x - phi) + C
 
 def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, p: dict[str, float], func):
 	"""Plot a general fit curve of a set of data
