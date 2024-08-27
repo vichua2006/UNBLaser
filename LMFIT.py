@@ -6,7 +6,8 @@ import lmfit as lm
 
 def Gaussian(x, amp, cen, wid, off):
 	"""Simple model of 1D Gaussian function."""
-	return amp * np.exp(-0.5*((x-cen)/wid)**2) + off
+	# adjusted width to reflect w = I/e^2
+	return amp * np.exp(-2*((x-cen)/wid)**2) + off
 
 
 def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
@@ -34,10 +35,10 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 		# params = model.make_params()
 
 		# Parameter definitions, initial guess
-		amp = lm.Parameter(name='amp', value=init_amp, vary=True, min=0., max=5.)
+		amp = lm.Parameter(name='amp', value=init_amp, vary=True, min=0., max=np.inf)
 		cen = lm.Parameter(name='cen', value=init_cen, vary=True, min=-np.inf, max=np.inf)
 		off = lm.Parameter(name='off', value=init_off, vary=True, min=-np.inf, max=np.inf)
-		wid = lm.Parameter(name='wid', value=init_wid, vary=True, min=0., max=5.)
+		wid = lm.Parameter(name='wid', value=init_wid, vary=True, min=0., max=np.inf)
 
 		params = lm.Parameters()
 		params.add_many(amp, cen, wid, off)
@@ -51,6 +52,9 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 
 	# give a report on the parameters
 	print(result.fit_report())
+	# write the report into a text file
+	with open(f"{dest_dir}\\{title}.txt", "w") as f:
+		f.write(result.fit_report())
 
 
 	fig = plt.figure(figsize=(7,5), constrained_layout=True)
@@ -62,7 +66,7 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 	plt.setp(ax0.get_xticklabels(), visible=False)
 
 	axs[0].set_ylabel(r'$y - f(x)$')
-	axs[1].set_xlabel(r'Position (pixels)')
+	axs[1].set_xlabel(r'Position (mm)')
 	axs[1].set_ylabel(r'Brightness')
 
 	axs[0].plot(x, y-result.best_fit, color='black', marker='.', linestyle='', label='Residuals')
@@ -76,6 +80,7 @@ def plotGaussian(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str):
 		ax.legend(loc='best')
 		ax.grid()
 
+	plt.title(title)
 	plt.savefig(f"{dest_dir}\\{title}.pdf", format="pdf")
 	plt.close()
 

@@ -1,11 +1,12 @@
 from PIL import Image
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 from LMFIT import plotGaussian
 from ConvertPixelsTomm import convertpixtomm
 
 IMGSRC = r".\images\laser_beams\patch_3"
-DEST = r".\intensity_profile\patch_3_2D"
+DEST = r".\intensity_profile\patch_3_2D\fitted"
 
 def load_image(file_name: str):
     image = Image.open(file_name)
@@ -47,19 +48,22 @@ def sum_columns_rows(image_array):
   return column_sums, row_sums
 
 def main():
-    arr = load_image(f"{IMGSRC}\\{"exp200.tiff"}")
-    x, y, _ = position_arrays(arr)
-    x, y = convertpixtomm(x, y)
-    cs, rs = sum_columns_rows(arr)
-    plotGaussian(x, cs, "exp200", ".\\")
-    # a, b, c = position_arrays(arr)
-    # scatter_plot(a, b, c)
-    
+    file_names = os.listdir(IMGSRC)
 
-#Example
-'''
-scatter_plot(position_arrays(load_image('exp200.tiff'))[0], position_arrays(load_image('exp200.tiff'))[1], position_arrays(load_image('exp200.tiff'))[2])
-'''
+    for full_name in file_names:
+        name = full_name.split(".")[0]
+        src = f"{IMGSRC}\\{full_name}"  
+        arr = load_image(src)
+
+        new_dir = f"{DEST}\\{name}"
+        os.makedirs(new_dir)
+
+        x, y, _ = position_arrays(arr)
+        x, y = convertpixtomm(x, y)
+        cs, rs = sum_columns_rows(arr)
+        plotGaussian(x, cs, name + "x", new_dir)
+        plotGaussian(y, rs, name + "y", new_dir)
+    
 
 if __name__ == "__main__":
     main()

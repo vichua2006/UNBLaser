@@ -1,0 +1,21 @@
+[[Model]]
+    Model(Gaussian)
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 41
+    # data points      = 500
+    # variables        = 4
+    chi-square         = 1.4679e+12
+    reduced chi-square = 2.9594e+09
+    Akaike info crit   = 10908.1175
+    Bayesian info crit = 10924.9760
+    R-squared          = 0.98864394
+[[Variables]]
+    amp:  2289087.34 +/- 12869.2712 (0.56%) (init = 2596902)
+    cen:  2.10326138 +/- 7.9118e-04 (0.04%) (init = 2.128702)
+    wid:  0.24639429 +/- 0.00163339 (0.66%) (init = 1)
+    off:  102699.910 +/- 2661.36319 (2.59%) (init = 0)
+[[Correlations]] (unreported correlations are < 0.100)
+    C(amp, wid) = -0.5170
+    C(wid, off) = -0.2480
+    C(amp, off) = -0.1462
