@@ -14,6 +14,15 @@ def Sinusoidal(x, amp, freq, phi, off):
     # C: constant offset
     return amp * np.sin(2*np.pi*freq*(x - phi)) + off
 
+def ComplexExp(x, amp, freq, phi, off):
+	return amp * np.exp(2j * np.pi * freq * (x - phi)) + off
+
+def complexSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
+	return ComplexExp(x, amp1, freq1, phi1, 0) + ComplexExp(x, amp2, freq2, phi2, 0) + off
+
+def realSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
+	return np.real(complexSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off))
+
 def sineSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
 	return Sinusoidal(x, amp1, freq1, phi1, 0) + Sinusoidal(x, amp2, freq2, phi2, 0) + off
 
@@ -68,7 +77,7 @@ def main():
 
 	x = df[ : , 1]
 	y = df[ : , 2]
-	y2 = df[ : , 3]
+	y2 = df[ : , 5]
 
 	params = lm.Parameters()
 	params.add(lm.Parameter(name='amp1', value=350., vary=True, min=0., max=np.inf))
@@ -80,7 +89,7 @@ def main():
 	params.add(lm.Parameter(name='off', value=800, vary=True, min=-np.inf, max=np.inf))
 
 	lmfit(x, y, "title", ".\\", params, sineSum)
-	# lmfit(x, y2, "title2", ".\\", params, Sinusoidal)
+	lmfit(x, y2, "title2", ".\\", params, sineSum)
 
 if __name__ == "__main__":
 	main()
