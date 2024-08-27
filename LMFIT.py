@@ -12,12 +12,13 @@ def Gaussian(x, amp, cen, wid, off):
 
 def Sinusoidal(x, amp, freq, phi, off):
     # C: constant offset
-    return amp * np.sin(2*np.pi*freq*x - phi) + off
+    return amp * np.sin(2*np.pi*freq*(x - phi)) + off
+
+def sineSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
+	return Sinusoidal(x, amp1, freq1, phi1, 0) + Sinusoidal(x, amp2, freq2, phi2, 0) + off
 
 def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Parameters, func: Callable):
-	"""Plot a general fit curve of a set of data
-	params: [name of parameter: inital guess]	
-	"""
+	"""Plot a general fit curve of a set of data"""
 
 	ShowInitialGuess = True
 
@@ -61,7 +62,7 @@ def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Pa
 	plt.close()
 
 def main():
-	df = pd.read_csv(r".\HalfWavePlate\raw_data\aug_27.csv").to_numpy()
+	df = pd.read_csv(r".\HalfWavePlate\raw_data\aug_27_with_sum.csv").to_numpy()
 	df = df[:-2]
 
 
@@ -70,13 +71,16 @@ def main():
 	y2 = df[ : , 3]
 
 	params = lm.Parameters()
-	params.add(lm.Parameter(name='amp', value=float(y.max()) - 400., vary=True, min=0., max=np.inf))
-	params.add(lm.Parameter(name='freq', value=2*np.pi, vary=True, min=0, max=np.inf))
-	params.add(lm.Parameter(name='off', value=400, vary=True, min=-np.inf, max=np.inf))
-	params.add(lm.Parameter(name='phi', value=0, vary=True, min=0., max=10))
+	params.add(lm.Parameter(name='amp1', value=350., vary=True, min=0., max=np.inf))
+	params.add(lm.Parameter(name='freq1', value=5.7107, vary=True, min=0, max=np.inf))
+	params.add(lm.Parameter(name='phi1', value=1, vary=True, min=0., max=10))
+	params.add(lm.Parameter(name='amp2', value=200., vary=True, min=0., max=np.inf))
+	params.add(lm.Parameter(name='freq2', value=6.366, vary=True, min=0, max=np.inf))
+	params.add(lm.Parameter(name='phi2', value=1, vary=True, min=0., max=10))
+	params.add(lm.Parameter(name='off', value=800, vary=True, min=-np.inf, max=np.inf))
 
-	lmfit(x, y, "title", ".\\", params, Sinusoidal)
-	lmfit(x, y2, "title2", ".\\", params, Sinusoidal)
+	lmfit(x, y, "title", ".\\", params, sineSum)
+	# lmfit(x, y2, "title2", ".\\", params, Sinusoidal)
 
 if __name__ == "__main__":
 	main()

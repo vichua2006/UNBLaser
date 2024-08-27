@@ -1,0 +1,40 @@
+[[Model]]
+    Model(sineSum)
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 3323
+    # data points      = 37
+    # variables        = 7
+    chi-square         = 123059.414
+    reduced chi-square = 4101.98048
+    Akaike info crit   = 314.051672
+    Bayesian info crit = 325.328097
+    R-squared          = 0.94358484
+[[Variables]]
+    amp1:   327477.375 +/- 2.6001e+10 (7939916.64%) (init = 350)
+    freq1:  5.72879415 +/- 32.6063888 (569.17%) (init = 5.7107)
+    phi1:   1.09068919 +/- 5.39725712 (494.85%) (init = 1)
+    amp2:   338.376902 +/- 15.5620259 (4.60%) (init = 200)
+    freq2:  6.36671953 +/- 0.00397426 (0.06%) (init = 6.366)
+    phi2:   0.95858681 +/- 0.00175122 (0.18%) (init = 1)
+    off:    327911.610 +/- 2.6001e+10 (7929387.99%) (init = 800)
+[[Correlations]] (unreported correlations are < 0.100)
+    C(amp1, off)    = +1.0000
+    C(freq1, off)   = +1.0000
+    C(amp1, freq1)  = +1.0000
+    C(freq1, phi1)  = +1.0000
+    C(phi1, off)    = +1.0000
+    C(amp1, phi1)   = +1.0000
+    C(freq2, phi2)  = +0.7735
+    C(phi1, freq2)  = -0.2557
+    C(freq1, freq2) = -0.2557
+    C(amp1, freq2)  = -0.2557
+    C(freq2, off)   = -0.2557
+    C(amp1, amp2)   = +0.2225
+    C(amp2, off)    = +0.2225
+    C(phi1, amp2)   = +0.2225
+    C(freq1, amp2)  = +0.2225
+    C(phi1, phi2)   = -0.2101
+    C(freq1, phi2)  = -0.2101
+    C(amp1, phi2)   = -0.2101
+    C(phi2, off)    = -0.2101

@@ -11,7 +11,7 @@ def mySine(x, amp, freq, phi, C):
 ModelFile = 'Sine_Model.sav'
 
 Model1 = lm.Model(mySine)
-Pars1  = Model1.make_params(amp=1., freq=0.25, phi=1., C=400)
+Pars1  = Model1.make_params(amp=400., freq=2*np.pi, phi=1., C=400)
 Pars1['amp'].max = 1000.
 Pars1['amp'].min = 0.
 Pars1['freq'].max = np.inf
