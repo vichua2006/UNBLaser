@@ -5,7 +5,7 @@ import numpy as np
 import lmfit as lm
 from typing import Callable
 
-from LMFIT_functions import cosineSum
+from LMFIT_functions import cosineSquared, cosineSum
 
 
 def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Parameters, func: Callable):
@@ -53,26 +53,26 @@ def lmfit(x: np.ndarray, y: np.ndarray, title: str, dest_dir: str, params: lm.Pa
 	plt.close()
 
 def main():
-	df = pd.read_csv(r".\HalfWavePlate\raw_data\aug_28.csv").to_numpy()
+	df = pd.read_csv(r".\HalfWavePlate\raw_data\aug28halfwavemeausurements.csv").to_numpy()
 	df = df[:-2]
 
 
 	x = df[ : , 1]
-	y = df[ : , 2]
-	y2 = df[ : , 3]
+	y = df[ : , 6]
+	y2 = df[ : , 7]
 
 	params = lm.Parameters()
 	params.add(lm.Parameter(name='amp1', value=0.3, vary=True, min=0., max=2))
 	params.add(lm.Parameter(name='phi', value=-1.3, vary=True, min=-np.pi, max=np.pi))
 	params.add(lm.Parameter(name='amp2', value=0.7, vary=True, min=0., max=2))
 	params.add(lm.Parameter(name='off', value=0, vary=True, min=-0.5, max=0.5))
-	lmfit(x, y, "perpendicular", ".\\", params, cosineSum)
+	lmfit(x, y, "perpendicular", ".\\", params, cosineSquared)
 
 	params.add(lm.Parameter(name='amp1', value=0.3, vary=True, min=0., max=2))
 	params.add(lm.Parameter(name='phi', value=0.25, vary=True, min=-np.pi, max=np.pi))
 	params.add(lm.Parameter(name='amp2', value=0.5, vary=True, min=0., max=2))
 	params.add(lm.Parameter(name='off', value=0, vary=True, min=-0.5, max=0.5))
-	lmfit(x, y2, "parallel", ".\\", params, cosineSum)
+	lmfit(x, y2, "parallel", ".\\", params, cosineSquared)
 
 if __name__ == "__main__":
 	main()
