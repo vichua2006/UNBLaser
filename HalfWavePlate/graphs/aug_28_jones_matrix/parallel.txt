@@ -1,0 +1,21 @@
+[[Model]]
+    Model(power)
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 44
+    # data points      = 142
+    # variables        = 6
+    chi-square         = 0.25534352
+    reduced chi-square = 0.00187753
+    Akaike info crit   = -885.578106
+    Bayesian info crit = -867.843143
+    R-squared          = np.complex128(0.9600941300919453+0j)
+##  Warning: uncertainties could not be estimated:
+    eta:    at initial value
+[[Variables]]
+    amp:    0.87068093 (init = 1)
+    phase: -0.26367519 (init = -0.2)
+    off:    0.01290024 (init = 0)
+    eta:    1.00000000 (init = 1)
+    phi:    6.0033e-04 (init = 1)
+    theta:  4.41213056 (init = 1)
