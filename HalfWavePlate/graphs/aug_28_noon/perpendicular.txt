@@ -1,0 +1,19 @@
+[[Model]]
+    Model(cosineSum)
+[[Fit Statistics]]
+    # fitting method   = leastsq
+    # function evals   = 39
+    # data points      = 71
+    # variables        = 4
+    chi-square         = 0.18077365
+    reduced chi-square = 0.00269811
+    Akaike info crit   = -416.096451
+    Bayesian info crit = -407.045731
+    R-squared          = 0.91808194
+[[Variables]]
+    amp1:  2.7803e-11 +/- 0.16574848 (596144075618.29%) (init = 0.3)
+    phi:  -1.34155444 +/- 0.01799396 (1.34%) (init = -1.3)
+    amp2:  0.69368673 +/- 0.01265745 (1.82%) (init = 0.7)
+    off:   0.08255061 +/- 0.01082915 (13.12%) (init = 0)
+[[Correlations]] (unreported correlations are < 0.100)
+    C(amp2, off) = -0.8222

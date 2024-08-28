@@ -23,3 +23,9 @@ def realSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
 
 def sineSum(x, amp1, amp2, freq1, freq2, phi1, phi2, off):
 	return Sinusoidal(x, amp1, freq1, phi1, 0) + Sinusoidal(x, amp2, freq2, phi2, 0) + off
+
+def cosineSum(x: np.ndarray, amp1: float, amp2: float, off: float, phi: float) -> np.ndarray:
+    return (amp1 * np.cos(x + phi) + amp2 * np.cos(2 * x + phi)) ** 2 + off 
+
+def cosineSquared(x, amp1, off, phi) -> np.ndarray:
+	return amp1 * (np.cos(x + phi)) ** 2 + off
