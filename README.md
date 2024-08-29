@@ -21,9 +21,13 @@ Example graphs are camera trial data, with exposure at 600 ms
 
 ### Image
 
-![exp600](https://github.com/vichua2006/UNBLaser/blob/main/images/patch_3/exp600.tiff)
+![exp600](https://github.com/vichua2006/UNBLaser/blob/main/README_images/Exp600.png)
 
 ### 2D Profile
 
 (summed columns of image)
-![exp600-2D]()
+![exp600-2D](https://github.com/vichua2006/UNBLaser/blob/main/README_images/2D%20Intensity%20Profile.png)
+
+### 3D Profile
+
+![exp600-3D](https://github.com/vichua2006/UNBLaser/blob/main/README_images/3D%20Intensity%20Profile.png)
