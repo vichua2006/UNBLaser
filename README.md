@@ -16,7 +16,7 @@ _(this whole thing is somewhat handwavy, because a 2D graph cannot fully represe
 
 # Graphing
 
-Graphed with [matplotlib](https://matplotlib.org/)
+Graphed with [matplotlib](https://matplotlib.org/) <br/>
 Example graphs are camera trial data, with exposure at 600 ms
 
 ### Image
