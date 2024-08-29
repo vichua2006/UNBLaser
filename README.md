@@ -4,7 +4,7 @@ A repo containing matplotlib scripts used to analyze the intensity profiles of v
 
 # Laser Intensity
 
-Defined as the power per area of the laser (units of $\frac{W}{m^2}$) of a laser beam. Follows a [[Gaussian Distribution]], with the following equation\*:
+Defined as the power per area of the laser (units of $\frac{W}{m^2}$) of a laser beam. Follows a [Gaussian Distribution](https://en.wikipedia.org/wiki/Multivariate_normal_distribution), with the following equation\*:
 
 $$
 I(x) = I_0 \cdot e^{-2(\frac{x}{W_0})^2}
@@ -17,3 +17,13 @@ _(this whole thing is somewhat handwavy, because a 2D graph cannot fully represe
 # Graphing
 
 Graphed with [matplotlib](https://matplotlib.org/)
+Example graphs are camera trial data, with exposure at 600 ms
+
+### Image
+
+![exp600](https://github.com/vichua2006/UNBLaser/blob/main/images/patch_3/exp600.tiff)
+
+### 2D Profile
+
+(summed columns of image)
+![exp600-2D]()
